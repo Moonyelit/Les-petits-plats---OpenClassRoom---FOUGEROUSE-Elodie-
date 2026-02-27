@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Les petits plats – Recettes</title>
+
+    <!-- Tailwind CSS v4 via CDN navigateur -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="min-h-dvh bg-slate-50 text-slate-900">
+    <header>
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4">
+        <div class="flex items-center gap-3">
+          <img
+            src="./assets/images/Logo.svg"
+            alt="Les petits plats"
+            class="h-8 w-auto"
+          />
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-8">
+      <section aria-labelledby="recipes-title">
+        <header class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h1 id="recipes-title" class="text-2xl font-semibold tracking-tight text-slate-900">
+              Recettes
+            </h1>
+          </div>
+          <p
+            id="recipes-count"
+            class="text-sm font-medium text-slate-600"
+            aria-live="polite"
+          ></p>
+        </header>
+
+        <div
+          id="recipes-grid"
+          class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          aria-live="polite"
+        >
+          <!-- Les cards sont injectées par factory-pattern/card.js -->
+        </div>
+      </section>
+    </main>
+
+    <script src="./recipes.js"></script>
+    <script src="./factory-pattern/card.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
