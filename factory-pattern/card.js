@@ -16,12 +16,12 @@ function recipeFactory(data) {
   function getRecipeCardDOM() {
     const article = document.createElement("article");
     article.className =
-      "flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200";
+      "flex max-h-[731px] h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200";
     article.setAttribute("data-recipe-id", String(id));
 
     // Image
     const figure = document.createElement("figure");
-    figure.className = "relative h-48 w-full overflow-hidden bg-slate-100";
+    figure.className = "relative min-h-[253px] h-48 w-full overflow-hidden bg-slate-100";
 
     const img = document.createElement("img");
     img.src = IMAGE_BASE_PATH.replace(/\/?$/, "/") + image;
@@ -30,7 +30,7 @@ function recipeFactory(data) {
 
     const timeBadge = document.createElement("p");
     timeBadge.className =
-      "pointer-events-none absolute right-3 top-3 inline-flex items-center rounded-full bg-yellow-400 px-3 py-1 text-xs font-medium text-gray-700";
+      "pointer-events-none absolute right-3 top-3 inline-flex items-center justify-center rounded-full bg-amber-300 px-3 py-1.5 font-[family-name:Manrope,sans-serif] text-xs font-normal leading-none tracking-normal text-gray-700";
     timeBadge.textContent = `${time} min`;
 
     figure.appendChild(img);
@@ -38,42 +38,48 @@ function recipeFactory(data) {
 
     // Contenu texte
     const content = document.createElement("div");
-    content.className = "flex flex-1 flex-col gap-3 p-4";
+    content.className = "flex flex-1 flex-col gap-3 px-6 py-10";
 
     const header = document.createElement("header");
     header.className = "flex items-start justify-between gap-2";
 
     const title = document.createElement("h2");
-    title.className = "text-sm font-semibold leading-snug text-slate-900";
+    title.className = "font-[Anton] text-lg font-normal leading-none tracking-normal text-slate-900 pb-4";
     title.textContent = name;
 
-    const servings = document.createElement("p");
-    servings.className = "text-xs font-medium text-slate-500";
-    if (typeof data.servings === "number") {
-      servings.textContent =
-        data.servings <= 1 ? "1 portion" : `${data.servings} portions`;
-    }
-
     header.appendChild(title);
-    header.appendChild(servings);
+
+    const recipeHeading = document.createElement("h3");
+    recipeHeading.className =
+      "font-[Manrope] text-xs font-bold leading-none tracking-[0.09em] pb-2 uppercase text-[#7A7A7A]";
+    recipeHeading.textContent = "Recette";
 
     const descriptionEl = document.createElement("p");
-    descriptionEl.className = "line-clamp-3 text-xs text-slate-600";
+    descriptionEl.className =
+      "line-clamp-4 mb-6 font-[Manrope] text-sm font-normal leading-normal tracking-normal text-[#1B1B1B]";
     descriptionEl.textContent = description;
+
+    const ingredientsHeading = document.createElement("h3");
+    ingredientsHeading.className =
+      "font-[Manrope] mb-1 text-xs font-bold leading-none tracking-[0.09em] uppercase text-[#7A7A7A]";
+    ingredientsHeading.textContent = "Ingrédients";
 
     const ingredientsList = document.createElement("ul");
     ingredientsList.className =
-      "mt-auto grid grid-cols-2 gap-x-3 gap-y-1 pt-2 text-xs text-slate-700";
+      "grid grid-cols-2 gap-x-10fr gap-y-6 pt-2 text-xs text-[#7A7A7A]";
 
     ingredients.forEach((item) => {
       const li = document.createElement("li");
+      li.className = "flex flex-col gap-1.5";
 
       const nameSpan = document.createElement("span");
-      nameSpan.className = "font-semibold";
+      nameSpan.className =
+        "font-[Manrope] text-sm font-medium leading-none tracking-normal text-[#1B1B1B]";
       nameSpan.textContent = item.ingredient;
 
       const detailsSpan = document.createElement("span");
-      detailsSpan.className = "ml-1 text-slate-500";
+      detailsSpan.className =
+        "font-[Manrope] text-sm font-normal leading-none tracking-normal text-[#7A7A7A]";
 
       const quantity = item.quantity ?? "";
       const unit = item.unit ?? item.unite ?? "";
@@ -89,7 +95,9 @@ function recipeFactory(data) {
     });
 
     content.appendChild(header);
+    content.appendChild(recipeHeading);
     content.appendChild(descriptionEl);
+    content.appendChild(ingredientsHeading);
     content.appendChild(ingredientsList);
 
     article.appendChild(figure);
