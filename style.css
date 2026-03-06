@@ -14,7 +14,8 @@
     --color-slate-600: oklch(44.6% 0.043 257.281);
     --color-slate-900: oklch(20.8% 0.042 265.755);
     --color-gray-700: oklch(37.3% 0.034 259.733);
-    --color-white: #fff;
+    --color-black: #000;
+    --color-white: #ffffff;
     --spacing: 0.25rem;
     --container-2xl: 42rem;
     --container-6xl: 72rem;
@@ -32,6 +33,10 @@
     --radius-2xl: 1rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --color-primary: #ffd15b;
+    --color-dark: #1b1b1b;
+    --color-gray: #7a7a7a;
+    --color-light-gray: #ededed;
   }
 }
 @layer base {
@@ -318,14 +323,11 @@
   .rounded-full {
     border-radius: calc(infinity * 1px);
   }
-  .bg-amber-300 {
-    background-color: var(--color-amber-300);
+  .bg-light-gray {
+    background-color: var(--color-light-gray);
   }
-  .bg-slate-50 {
-    background-color: var(--color-slate-50);
-  }
-  .bg-slate-100 {
-    background-color: var(--color-slate-100);
+  .bg-primary {
+    background-color: var(--color-primary);
   }
   .bg-slate-900 {
     background-color: var(--color-slate-900);
@@ -427,17 +429,14 @@
     --tw-tracking: var(--tracking-normal);
     letter-spacing: var(--tracking-normal);
   }
-  .text-\[\#1B1B1B\] {
-    color: #1B1B1B;
+  .text-dark {
+    color: var(--color-dark);
   }
-  .text-\[\#7A7A7A\] {
-    color: #7A7A7A;
+  .text-gray {
+    color: var(--color-gray);
   }
-  .text-\[\#ffd15b\] {
-    color: #ffd15b;
-  }
-  .text-gray-700 {
-    color: var(--color-gray-700);
+  .text-primary {
+    color: var(--color-primary);
   }
   .text-slate-600 {
     color: var(--color-slate-600);
@@ -456,8 +455,8 @@
     --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
-  .ring-slate-200 {
-    --tw-ring-color: var(--color-slate-200);
+  .ring-light-gray {
+    --tw-ring-color: var(--color-light-gray);
   }
   .brightness-0 {
     --tw-brightness: brightness(0%);
