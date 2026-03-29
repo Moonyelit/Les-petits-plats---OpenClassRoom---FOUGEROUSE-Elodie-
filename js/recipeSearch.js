@@ -13,18 +13,19 @@ export function stem(s) {
   return s;
 }
 
-// Construit le texte indexé d'une recette (nom, description, ingrédients)
-function recipeSearchText(recipe) {
-  const parts = [
-    recipe.name,
-    recipe.description,
-    ...recipe.ingredients.map((i) => i.ingredient),
-  ];
-  return normalize(parts.join(" "));
-}
-
 // Vérifie si une recette correspond à la requête de recherche
+// Version boucles natives : inspecte chaque champ avec un for, retour anticipé dès la première correspondance
 export function recipeMatchesSearch(recipe, normalizedQuery) {
   if (!normalizedQuery) return true;
-  return recipeSearchText(recipe).includes(normalizedQuery);
+
+  if (normalize(recipe.name).includes(normalizedQuery)) return true;
+  if (normalize(recipe.description).includes(normalizedQuery)) return true;
+
+  for (let i = 0; i < recipe.ingredients.length; i++) {
+    if (normalize(recipe.ingredients[i].ingredient).includes(normalizedQuery)) {
+      return true;
+    }
+  }
+
+  return false;
 }
