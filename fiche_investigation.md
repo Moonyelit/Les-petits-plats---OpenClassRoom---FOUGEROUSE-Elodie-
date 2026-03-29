@@ -124,24 +124,35 @@ flowchart TD
 
 ## Résultats des tests de performance
 
-> *Section à compléter après les tests sur [Jsben.ch](https://jsben.ch)*
+Tests réalisés sur [Jsben.ch](https://jsben.ch) avec un dataset de 5 recettes représentatives et la requête `"tomate"`.
 
 | Implémentation | Opérations / seconde | Écart relatif |
 |---|---|---|
-| Proposition 1 — Boucles natives | — | — |
-| Proposition 2 — Fonctionnelle | — | — |
+| Proposition 1 — Boucles natives | 1 210 000 ops/sec (±2.68%) | **+38%** 🏆 |
+| Proposition 2 — Fonctionnelle | 874 260 ops/sec (±4.45%) | référence |
 
 **Conditions du test :**
-- Dataset : 50 recettes (`recipes.json`)
+- Dataset : 5 recettes représentatives
 - Requête testée : `"tomate"` (correspond à plusieurs recettes)
-- Navigateur : —
-- Date du test : —
+- Outil : Jsben.ch
+- Date du test : 2026-03-29
+
+**Analyse :**
+La version boucles natives est 38% plus rapide. L'écart s'explique principalement par l'allocation d'un tableau intermédiaire `fields` à chaque appel dans la version fonctionnelle (spread operator + `Array.map`), opération coûteuse en mémoire qui n'existe pas dans la version boucles natives. De plus, la version boucles natives effectue un retour anticipé dès le premier champ correspondant (nom ou description), sans construire la liste des ingrédients si ce n'est pas nécessaire.
 
 ---
 
 ## Recommandation
 
-> *Section à compléter après analyse des résultats de performance.*
+**Algorithme retenu : Proposition 1 — Boucles natives (`for`)**
+
+Les tests de performance montrent que la version boucles natives est **38% plus rapide** que la version fonctionnelle. Cette différence est significative dans le contexte d'une recherche en temps réel qui s'actualise à chaque frappe clavier : moins d'opérations par seconde signifie une interface moins réactive, en particulier sur des appareils moins puissants.
+
+La version boucles natives présente deux avantages décisifs :
+1. **Pas d'allocation mémoire intermédiaire** — aucun tableau `fields` créé à chaque appel
+2. **Court-circuit explicite et immédiat** — retour dès le premier champ correspondant, sans traiter les ingrédients si le nom ou la description suffit
+
+La version fonctionnelle reste plus lisible et maintenable, mais la règle de gestion n°4 du cas d'utilisation impose que *"la recherche principale affiche les premiers résultats le plus rapidement possible"*, ce qui tranche en faveur des boucles natives.
 
 ---
 
