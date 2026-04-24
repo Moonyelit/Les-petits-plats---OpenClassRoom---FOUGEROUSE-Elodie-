@@ -4,14 +4,13 @@
   "description": "Algorithme de recherche de recettes en JavaScript",
   "main": "recipes.js",
   "scripts": {
-    "build": "npx @tailwindcss/cli -i ./css/input.css -o ./css/style.css",
-    "dev": "npx @tailwindcss/cli -i ./css/input.css -o ./css/style.css --watch"
+    "build": "npx tailwindcss -i ./css/input.css -o ./css/style.css",
+    "dev": "npx tailwindcss -i ./css/input.css -o ./css/style.css --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@tailwindcss/cli": "^4.2.1",
-    "tailwindcss": "^4.2.1"
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
   }
 }
